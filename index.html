@@ -1,15 +1,134 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Project...</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>after.live — Yooeun Lee</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Baskervville:ital@0;1&family=Fragment+Mono:ital@0;1&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+
+  <canvas id="particles"></canvas>
+  <div class="grain"></div>
+  <div class="vignette"></div>
+
+  <nav>
+    <span class="nav-title">after.live</span>
+    <span class="nav-meta">IMD Capstone 2026</span>
+  </nav>
+
   <main>
-    <h1>Project Title</h1>
-    <p>Project description.</p>
+
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-eyebrow">
+        <span class="dot"></span>
+        <span>Yooeun Lee &nbsp;/&nbsp; Immersive Media Design &nbsp;/&nbsp; 2026</span>
+      </div>
+      <h1>
+        <span class="h1-line reveal" style="--d:0.1s">after</span><span class="h1-dot reveal" style="--d:0.3s">.</span><span class="h1-line reveal" style="--d:0.5s">live</span>
+      </h1>
+      <p class="hero-sub reveal" style="--d:0.8s">
+        What happens to your data<br>after you're gone?
+      </p>
+      <a href="#participate" class="hero-cta reveal" style="--d:1.1s">
+        <span>Text to participate</span>
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+    </section>
+
+    <!-- STAT BAND -->
+    <div class="stat-band reveal" style="--d:1.3s">
+      <div class="stat">
+        <span class="stat-num" data-target="1200000000">0</span>
+        <span class="stat-label">deceased Facebook accounts projected by 2060</span>
+      </div>
+      <div class="stat-divider"></div>
+      <div class="stat">
+        <span class="stat-num" data-target="4900000000">0</span>
+        <span class="stat-label">projected by end of century</span>
+      </div>
+      <div class="stat-divider"></div>
+      <div class="stat">
+        <span class="stat-label solo">By the early 22nd century, the dead<br>will outnumber the living online.</span>
+      </div>
+    </div>
+
+    <!-- ABOUT -->
+    <section class="about">
+      <div class="about-label reveal" style="--d:0s">
+        <span>About the work</span>
+      </div>
+      <div class="about-body">
+        <p class="about-large reveal" style="--d:0.1s">
+          Every day we leave behind traces of our identity in the digital realm.
+        </p>
+        <p class="about-text reveal" style="--d:0.2s">
+          <em>after.live</em> is an immersive installation that explores the digital afterlife: how images and data of us persist long after we're gone, and are continuously remixed, distorted, and reanimated by AI systems. What does identity become when only our digital representations remain?
+        </p>
+        <p class="about-text reveal" style="--d:0.3s">
+          What we currently consider vital sources of information may evolve into <em>digital charnel houses</em> — vast repositories of data belonging almost entirely to the deceased. <em>after.live</em> is a glimpse into what your data might be up to after you've left this world.
+        </p>
+        <p class="about-text reveal" style="--d:0.4s">
+          You will lie beneath a projection of yourself. The images that you submit as representations of yourself will be processed and distorted by a machine, dissolving slowly above you. Your silhouette will hold them briefly before letting go.
+        </p>
+      </div>
+    </section>
+
+    <!-- EXPERIENCE -->
+    <section class="experience">
+      <div class="exp-label reveal" style="--d:0s">
+        <span>The experience</span>
+      </div>
+      <div class="exp-grid">
+        <div class="exp-item reveal" style="--d:0.1s">
+          <span class="exp-num">01</span>
+          <p>Text the number below before entering.</p>
+        </div>
+        <div class="exp-item reveal" style="--d:0.2s">
+          <span class="exp-num">02</span>
+          <p>You will be asked a few questions and prompted to send photographs.</p>
+        </div>
+        <div class="exp-item reveal" style="--d:0.3s">
+          <span class="exp-num">03</span>
+          <p>Lie down & look up.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- PARTICIPATE -->
+    <section class="participate" id="participate">
+      <div class="participate-inner reveal" style="--d:0s">
+        <p class="participate-instruction">To begin, text</p>
+        <div class="keyword-block">
+          <span class="keyword">ALIVE</span>
+        </div>
+        <p class="participate-to">to</p>
+        <div class="number-block">
+          <span class="number">+1 (000) 000-0000</span>
+        </div>
+        <p class="participate-note">
+          By participating, you consent to your submitted images being temporarily stored, processed by an AI system, and displayed as part of this installation. Reply STOP at any time to opt out. Msg &amp; data rates may apply.
+        </p>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+      <div class="footer-left">
+        <span class="footer-title">after.live</span>
+        <span class="footer-credit">by Yooeun Lee</span>
+      </div>
+      <div class="footer-right">
+        <span>IMD Lab &nbsp;·&nbsp; Brendan Iribe Center</span>
+        <span>May 8 2026 &nbsp;·&nbsp; 4:00 – 7:00 PM</span>
+      </div>
+    </footer>
+
   </main>
+
+  <script src="script.js"></script>
 </body>
 </html>
-
