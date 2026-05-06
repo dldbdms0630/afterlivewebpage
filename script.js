@@ -173,8 +173,11 @@ document.getElementById('btn-4').addEventListener('click', async () => {
 
   try {
     const res = await fetch(`${SERVER_URL}/upload`, {
-      method: 'POST',
-      body: formData,
+    method: 'POST',
+    body: formData,
+    headers: {
+        'ngrok-skip-browser-warning': 'true'
+    }
     });
 
     if (res.ok) {
