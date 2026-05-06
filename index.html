@@ -34,7 +34,7 @@
         What happens to your data<br>after you're gone?
       </p>
       <a href="#participate" class="hero-cta reveal" style="--d:1.1s">
-        <span>Text to participate</span>
+        <span>Submit your traces</span>
         <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </a>
     </section>
@@ -72,7 +72,7 @@
           What we currently consider vital sources of information may evolve into <em>digital charnel houses</em> — vast repositories of data belonging almost entirely to the deceased. <em>after.live</em> is a glimpse into what your data might be up to after you've left this world.
         </p>
         <p class="about-text reveal" style="--d:0.4s">
-          You will lie beneath a projection of yourself. The images that you submit as representations of yourself will be processed and distorted by a machine, dissolving slowly above you. Your silhouette will hold them briefly before letting go.
+          You will lie beneath a projection of yourself. The images you submit will be processed and distorted by a machine, dissolving slowly above you. Your silhouette will hold them briefly before letting go.
         </p>
       </div>
     </section>
@@ -85,7 +85,7 @@
       <div class="exp-grid">
         <div class="exp-item reveal" style="--d:0.1s">
           <span class="exp-num">01</span>
-          <p>Text the number below before entering.</p>
+          <p>Submit your photos below before entering.</p>
         </div>
         <div class="exp-item reveal" style="--d:0.2s">
           <span class="exp-num">02</span>
@@ -93,26 +93,104 @@
         </div>
         <div class="exp-item reveal" style="--d:0.3s">
           <span class="exp-num">03</span>
-          <p>Lie down & look up.</p>
+          <p>Lie down &amp; look up.</p>
         </div>
       </div>
     </section>
 
-    <!-- PARTICIPATE -->
+    <!-- PARTICIPATE / UPLOAD FORM -->
     <section class="participate" id="participate">
-      <div class="participate-inner reveal" style="--d:0s">
-        <p class="participate-instruction">To begin, text</p>
-        <div class="keyword-block">
-          <span class="keyword">ALIVE</span>
-        </div>
-        <p class="participate-to">to</p>
-        <div class="number-block">
-          <span class="number">+1 (000) 000-0000</span>
-        </div>
-        <p class="participate-note">
-          By participating, you consent to your submitted images being temporarily stored, processed by an AI system, and displayed as part of this installation. Reply STOP at any time to opt out. Msg &amp; data rates may apply.
+
+      <!-- STEP 0: CONSENT -->
+      <div class="form-step active" id="step-consent">
+        <p class="step-label">before you begin</p>
+        <p class="step-question">Leave something behind.</p>
+        <p class="step-body">
+          The photos you send will be held briefly, processed by an AI system, and woven into the live projection above you. They will not be shared publicly or used beyond this room.
+          <br><br>
+          By continuing, you confirm you are 18+ and consent to this use of your images.
+        </p>
+        <button class="form-btn" id="btn-consent">I understand — begin</button>
+        <p class="participate-note">Reply STOP at any time to opt out. Msg &amp; data rates may apply.</p>
+      </div>
+
+      <!-- STEP 1 -->
+      <div class="form-step" id="step-1">
+        <p class="step-label">01 / 04</p>
+        <p class="step-question">Send a photo of a place you keep returning to in your memory.</p>
+        <label class="upload-zone" id="zone-1">
+          <input type="file" accept="image/*" id="file-1" />
+          <span class="upload-icon">＋</span>
+          <span class="upload-text">tap to choose or take a photo</span>
+          <span class="upload-preview" id="preview-1"></span>
+        </label>
+        <button class="form-btn" id="btn-1" disabled>next</button>
+      </div>
+
+      <!-- STEP 2 -->
+      <div class="form-step" id="step-2">
+        <p class="step-label">02 / 04</p>
+        <p class="step-question">Send a photo of someone — or something — you love.</p>
+        <label class="upload-zone" id="zone-2">
+          <input type="file" accept="image/*" id="file-2" />
+          <span class="upload-icon">＋</span>
+          <span class="upload-text">tap to choose or take a photo</span>
+          <span class="upload-preview" id="preview-2"></span>
+        </label>
+        <button class="form-btn" id="btn-2" disabled>next</button>
+      </div>
+
+      <!-- STEP 3 -->
+      <div class="form-step" id="step-3">
+        <p class="step-label">03 / 04</p>
+        <p class="step-question">Send a photo of something small you do every day that nobody notices.</p>
+        <label class="upload-zone" id="zone-3">
+          <input type="file" accept="image/*" id="file-3" />
+          <span class="upload-icon">＋</span>
+          <span class="upload-text">tap to choose or take a photo</span>
+          <span class="upload-preview" id="preview-3"></span>
+        </label>
+        <button class="form-btn" id="btn-3" disabled>next</button>
+      </div>
+
+      <!-- STEP 4 -->
+      <div class="form-step" id="step-4">
+        <p class="step-label">04 / 04</p>
+        <p class="step-question">One last photo. Anything. The last one on your camera roll, your favorite, something random. It just has to be yours.</p>
+        <label class="upload-zone" id="zone-4">
+          <input type="file" accept="image/*" id="file-4" />
+          <span class="upload-icon">＋</span>
+          <span class="upload-text">tap to choose or take a photo</span>
+          <span class="upload-preview" id="preview-4"></span>
+        </label>
+        <button class="form-btn" id="btn-4" disabled>submit</button>
+      </div>
+
+      <!-- UPLOADING -->
+      <div class="form-step" id="step-uploading">
+        <p class="step-label">sending</p>
+        <div class="spinner"></div>
+        <p class="step-body">your traces are being received...</p>
+      </div>
+
+      <!-- DONE -->
+      <div class="form-step" id="step-done">
+        <p class="step-label">received</p>
+        <p class="step-question">That's everything.</p>
+        <p class="step-body">
+          Your traces have been received.<br>
+          Find a spot, lie back, and look up.<br><br>
+          <em>after.live is ready for you.</em>
         </p>
       </div>
+
+      <!-- ERROR -->
+      <div class="form-step" id="step-error">
+        <p class="step-label">something went wrong</p>
+        <p class="step-body" id="error-msg">Could not reach the server. Please try again.</p>
+        <button class="form-btn" id="btn-retry">try again</button>
+      </div>
+
     </section>
 
     <!-- FOOTER -->

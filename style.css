@@ -65,7 +65,7 @@ nav {
   justify-content: space-between;
   align-items: center;
   padding: 1.5rem 3rem;
-  background: linear-gradient(to bottom, rgba(4,7,15,0.92) 0%, transparent 100%);
+  background: linear-gradient(to bottom, rgba(8,8,7,0.95) 0%, transparent 100%);
 }
 
 .nav-title {
@@ -161,7 +161,6 @@ h1 {
   line-height: 1.6;
   max-width: 420px;
   margin-bottom: 3rem;
-  /* warm surprise accent on this line */
   border-left: 2px solid var(--gold);
   padding-left: 1rem;
 }
@@ -269,7 +268,6 @@ h1 {
   line-height: 1.4;
   color: var(--ink);
   max-width: 620px;
-  /* warm rose surprise */
   position: relative;
 }
 
@@ -280,7 +278,7 @@ h1 {
   height: 1px;
   background: var(--gold);
   margin-top: 1.5rem;
-  box-shadow: 0 0 8px rgba(212,96,122,0.4);
+  box-shadow: 0 0 8px rgba(201,169,110,0.3);
 }
 
 .about-text {
@@ -314,10 +312,7 @@ h1 {
   color: var(--muted);
 }
 
-.exp-grid {
-  display: flex;
-  flex-direction: column;
-}
+.exp-grid { display: flex; flex-direction: column; }
 
 .exp-item {
   display: grid;
@@ -325,7 +320,6 @@ h1 {
   align-items: start;
   padding: 2.2rem 0;
   border-bottom: 1px solid var(--rule);
-  transition: background 0.3s;
 }
 
 .exp-item:last-child { border-bottom: none; }
@@ -346,7 +340,7 @@ h1 {
   color: #b0a99f;
 }
 
-/* ── PARTICIPATE ──────────────────────────── */
+/* ── PARTICIPATE / FORM ───────────────────── */
 .participate {
   min-height: 80vh;
   display: flex;
@@ -364,7 +358,6 @@ h1 {
   pointer-events: none;
 }
 
-/* warm glow in corner — surprise element */
 .participate::after {
   content: '';
   position: absolute;
@@ -374,74 +367,174 @@ h1 {
   pointer-events: none;
 }
 
-.participate-inner {
-  text-align: center;
-  display: flex;
+/* ── FORM STEPS ───────────────────────────── */
+.form-step {
+  display: none;
   flex-direction: column;
   align-items: center;
-  gap: 1rem;
+  gap: 1.6rem;
+  width: 100%;
+  max-width: 480px;
+  text-align: center;
+  animation: stepin 0.7s ease both;
 }
 
-.participate-instruction {
-  font-family: var(--mono);
-  font-size: 0.65rem;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--muted);
+.form-step.active { display: flex; }
+
+@keyframes stepin {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
-.keyword-block {
-  margin: 1rem 0 0.5rem;
-  padding: 1.2rem 3.5rem;
-  border: 1px solid var(--gold-rule);
-  background: var(--gold-dim);
-  position: relative;
-}
-
-.keyword-block::before, .keyword-block::after {
-  content: '';
-  position: absolute;
-  width: 8px; height: 8px;
-  border-color: var(--gold);
-  border-style: solid;
-}
-.keyword-block::before { top: -1px; left: -1px; border-width: 1px 0 0 1px; }
-.keyword-block::after  { bottom: -1px; right: -1px; border-width: 0 1px 1px 0; }
-
-.keyword {
-  font-family: var(--mono);
-  font-size: clamp(2rem, 6vw, 4rem);
-  letter-spacing: 0.3em;
-  color: var(--gold);
-  text-shadow: 0 0 40px rgba(201,169,110,0.35);
-}
-
-.participate-to {
+.step-label {
   font-family: var(--mono);
   font-size: 0.62rem;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: var(--muted);
-  margin: 0.4rem 0;
+  color: var(--gold);
 }
 
-.number {
-  font-family: var(--mono);
-  font-size: clamp(1.1rem, 3vw, 1.8rem);
+.step-question {
+  font-family: var(--serif);
+  font-size: 1.25rem;
+  font-style: italic;
+  line-height: 1.65;
   color: var(--ink);
-  letter-spacing: 0.08em;
+  max-width: 380px;
+}
+
+.step-body {
+  font-size: 0.95rem;
+  line-height: 1.9;
+  color: var(--muted);
+  max-width: 400px;
+}
+
+.step-body em {
+  font-style: italic;
+  color: #a09890;
+}
+
+/* ── UPLOAD ZONE ─────────────────────────── */
+.upload-zone {
+  width: 100%;
+  max-width: 400px;
+  min-height: 200px;
+  border: 1px solid var(--gold-rule);
+  background: var(--gold-dim);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: border-color 0.3s, background 0.3s;
+}
+
+.upload-zone:hover {
+  border-color: var(--gold);
+  background: rgba(201,169,110,0.15);
+}
+
+.upload-zone input[type="file"] {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  cursor: pointer;
+  width: 100%;
+  height: 100%;
+}
+
+.upload-icon {
+  font-size: 2rem;
+  color: var(--gold);
+  line-height: 1;
+  pointer-events: none;
+  transition: opacity 0.3s;
+}
+
+.upload-text {
+  font-family: var(--mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  pointer-events: none;
+  transition: opacity 0.3s;
+}
+
+.upload-preview {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  opacity: 0;
+  transition: opacity 0.4s;
+}
+
+.upload-preview.loaded { opacity: 1; }
+
+/* corner brackets */
+.upload-zone::before, .upload-zone::after {
+  content: '';
+  position: absolute;
+  width: 10px; height: 10px;
+  border-color: var(--gold);
+  border-style: solid;
+  pointer-events: none;
+  z-index: 1;
+}
+.upload-zone::before { top: -1px; left: -1px; border-width: 1px 0 0 1px; }
+.upload-zone::after  { bottom: -1px; right: -1px; border-width: 0 1px 1px 0; }
+
+/* ── FORM BUTTON ─────────────────────────── */
+.form-btn {
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--bg);
+  background: var(--gold);
+  border: none;
+  padding: 1rem 3rem;
+  cursor: pointer;
+  width: 100%;
+  max-width: 400px;
+  transition: opacity 0.2s, transform 0.2s;
+}
+
+.form-btn:disabled {
+  opacity: 0.25;
+  cursor: not-allowed;
+}
+
+.form-btn:not(:disabled):hover {
+  opacity: 0.85;
+  transform: translateY(-1px);
 }
 
 .participate-note {
   font-family: var(--mono);
-  font-size: 0.6rem;
+  font-size: 0.58rem;
   letter-spacing: 0.04em;
   color: var(--muted);
   line-height: 1.9;
-  max-width: 480px;
-  margin-top: 1.5rem;
-  opacity: 0.7;
+  max-width: 400px;
+  opacity: 0.6;
 }
+
+/* ── SPINNER ─────────────────────────────── */
+.spinner {
+  width: 32px; height: 32px;
+  border: 1px solid var(--rule);
+  border-top-color: var(--gold);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin { to { transform: rotate(360deg); } }
 
 /* ── FOOTER ───────────────────────────────── */
 footer {
@@ -472,7 +565,6 @@ footer {
   font-weight: 300;
   font-size: 0.82rem;
   color: var(--muted);
-  /* warm amber surprise in footer */
   border-left: 1px solid var(--gold);
   padding-left: 0.6rem;
 }

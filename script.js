@@ -1,4 +1,11 @@
-// ── SCROLL REVEAL ─────────────────────────────────────────
+// ── CONFIG ─────────────────────────────────────────────────
+// Set this to your ngrok URL when running the Flask server
+// e.g. "https://abc123.ngrok-free.app"
+// Leave as localhost for local testing
+// const SERVER_URL = "http://localhost:5000";
+const SERVER_URL = "https://gnat-uplifted-carport.ngrok-free.dev";
+
+// ── SCROLL REVEAL ──────────────────────────────────────────
 const reveals = document.querySelectorAll('.reveal');
 const observer = new IntersectionObserver((entries) => {
   entries.forEach(e => {
@@ -13,7 +20,7 @@ reveals.forEach(el => observer.observe(el));
 // ── PARTICLE CANVAS ────────────────────────────────────────
 const canvas = document.getElementById('particles');
 const ctx = canvas.getContext('2d');
-let W, H, particles = [];
+let W, H;
 
 function resize() {
   W = canvas.width  = window.innerWidth;
@@ -23,15 +30,11 @@ resize();
 window.addEventListener('resize', resize);
 
 const PALETTES = [
-  [63, 255, 210],
-  [63, 255, 210],
-  [63, 255, 210],
-  [26, 107, 138],
-  [26, 107, 138],
-  [100, 200, 220],
-  [100, 200, 220],
-  [232, 149, 109],
-  [212, 96, 122],
+  [201,169,110],[201,169,110],[201,169,110],[201,169,110],
+  [180,145,85],[180,145,85],
+  [220,195,145],[220,195,145],
+  [210,130,80],
+  [190,100,90],
 ];
 
 class Particle {
@@ -64,6 +67,7 @@ class Particle {
   }
 }
 
+const particles = [];
 for (let i = 0; i < 120; i++) particles.push(new Particle());
 
 function animate() {
@@ -73,7 +77,7 @@ function animate() {
 }
 animate();
 
-// ── COUNTER ANIMATION ─────────────────────────────────────
+// ── COUNTER ANIMATION ──────────────────────────────────────
 function formatNum(n) {
   if (n >= 1e9) return (n / 1e9).toFixed(1) + 'B';
   if (n >= 1e6) return (n / 1e6).toFixed(1) + 'M';
@@ -100,3 +104,90 @@ const counterObserver = new IntersectionObserver((entries) => {
   });
 }, { threshold: 0.5 });
 counters.forEach(el => counterObserver.observe(el));
+
+// ── FORM STEP LOGIC ────────────────────────────────────────
+function showStep(id) {
+  document.querySelectorAll('.form-step').forEach(s => {
+    s.classList.remove('active');
+  });
+  const el = document.getElementById(id);
+  // retrigger animation
+  el.style.animation = 'none';
+  el.offsetHeight;
+  el.style.animation = '';
+  el.classList.add('active');
+}
+
+// consent → step 1
+document.getElementById('btn-consent').addEventListener('click', () => {
+  showStep('step-1');
+});
+
+// retry → step 1
+document.getElementById('btn-retry').addEventListener('click', () => {
+  showStep('step-1');
+});
+
+// steps 1–3: file select → enable next, next → advance
+[1, 2, 3, 4].forEach(n => {
+  const input   = document.getElementById(`file-${n}`);
+  const preview = document.getElementById(`preview-${n}`);
+  const btn     = document.getElementById(`btn-${n}`);
+  const zone    = document.getElementById(`zone-${n}`);
+
+  input.addEventListener('change', () => {
+    const file = input.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = e => {
+      preview.style.backgroundImage = `url(${e.target.result})`;
+      preview.classList.add('loaded');
+      zone.querySelector('.upload-icon').style.opacity = '0';
+      zone.querySelector('.upload-text').style.opacity = '0';
+    };
+    reader.readAsDataURL(file);
+    btn.disabled = false;
+  });
+
+  if (n < 4) {
+    btn.addEventListener('click', () => showStep(`step-${n + 1}`));
+  }
+});
+
+// ── SUBMIT ─────────────────────────────────────────────────
+document.getElementById('btn-4').addEventListener('click', async () => {
+  const files = [1,2,3,4].map(n => document.getElementById(`file-${n}`).files[0]);
+
+  if (files.some(f => !f)) {
+    document.getElementById('error-msg').textContent =
+      'Please select all four photos before submitting.';
+    showStep('step-error');
+    return;
+  }
+
+  showStep('step-uploading');
+
+  const formData = new FormData();
+  files.forEach((file, i) => formData.append(`photo_${i + 1}`, file));
+  formData.append('session_id', Date.now().toString());
+
+  try {
+    const res = await fetch(`${SERVER_URL}/upload`, {
+      method: 'POST',
+      body: formData,
+    });
+
+    if (res.ok) {
+      showStep('step-done');
+    } else {
+      const text = await res.text();
+      document.getElementById('error-msg').textContent =
+        `Server error ${res.status}. ${text}`;
+      showStep('step-error');
+    }
+  } catch (err) {
+    document.getElementById('error-msg').textContent =
+      'Could not reach the server. Make sure it is running and the URL is correct.';
+    showStep('step-error');
+  }
+});
