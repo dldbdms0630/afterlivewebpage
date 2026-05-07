@@ -175,7 +175,7 @@ document.getElementById('btn-4').addEventListener('click', async () => {
     const res = await fetch(`${SERVER_URL}/upload`, {
     method: 'POST',
     body: formData,
-    headers: {
+    headers: { 
         'ngrok-skip-browser-warning': 'true'
     }
     });
